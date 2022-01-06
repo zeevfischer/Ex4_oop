@@ -9,9 +9,9 @@ class agent:
         self.speed = speed
         self.pos = pos
 
-        self.nextpos = None
-        self.time = float('inf')
-        self.priorety = 0
+        # self.nextpos = None
+        # self.time = float('inf')
+        # self.priorety = 0
 
     def relode(self, data: dict) -> None:
         self.id = int(data['id'])
@@ -24,5 +24,5 @@ class agent:
         loc = temp.split(',')
         self.pos = Location.Location(int(loc[0]), int(loc[1]), int(loc[2]))
 
-        self.time = float('inf')
-        self.priorety = 0
+        # self.time = float('inf')
+        # self.priorety = 0

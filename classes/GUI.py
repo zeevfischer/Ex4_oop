@@ -62,6 +62,7 @@ class Gui:
     clock = pygame.time.Clock()
     FONT = pygame.font.SysFont('comicsans', 20)
 
+
     def __init__(self, algo=None):
         self.algo = algo
         self.screen = pygame.display.set_mode((800, 600), depth=32, flags=RESIZABLE)

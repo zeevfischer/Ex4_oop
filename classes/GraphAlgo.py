@@ -17,7 +17,7 @@ class GraphAlgo(GraphAlgoInterface):
         if len(args) == 1:
             self.graph = args[0]
 
-    def get_graph(self) -> GraphInterface:
+    def get_graph(self):
         return self.graph
         """
         :return: the directed graph on which the algorithm works on.

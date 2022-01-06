@@ -5,7 +5,6 @@ Very simple GUI example for python client to communicates with the server and "p
 """
 import sys
 from types import SimpleNamespace
-
 import pokimon
 from client import Client
 import json
