@@ -1,10 +1,11 @@
 import sys
 from types import SimpleNamespace
-
 import agent
 import pokimon
+from classes.GUI import Gui
 from client import Client
 import json
+import time
 from pygame import gfxdraw
 import pygame
 from pygame import *
@@ -38,10 +39,10 @@ def getPOK() -> list:
     return pokemons
 
 # this will use the function above and the Graph to deturmin the Edge each pokimon is on
-def src_dest_pok():
+def src_dest_pok() -> list:
     pokemons = getPOK()
     for pok in range(len(pokemons)):
-        for E in graph:
+        for E in graph.Edges.values():
             src = E.src
             dest = E.dest
             type_Edge = 0
@@ -56,16 +57,19 @@ def src_dest_pok():
             y1 = pos_src.y
             y2 = pos_dest.y
 
-            if pok.is_Edge(x1,y1,x2,y2,type_Edge) == True:
-                pok.src = int(src)
-                pok.dest = int(dest)
+            if pokemons[pok].is_Edge(x1,y1,x2,y2,type_Edge) == True:
+                pokemons[pok].src = int(src)
+                pokemons[pok].dest = int(dest)
+                break
+
+    return pokemons
 
 # this adds all the agents to the client
 # agent 1 will go to the src of the first pokimon
 # if there are more agents then pokimons then tha agent will go to the center og the Graph
 # if there are more pokimons then agents the algorithem will take car of that
 def agents():
-    pokemons = getPOK()
+    pokemons = src_dest_pok()
     size = int(json.loads(client.get_info())["GameServer"]["agents"])
     for i in range(size):
         if pokemons[i] != None:
@@ -85,7 +89,7 @@ def getagents():
         loc = temp.split(',')
         tap = (float(loc[0]), float(loc[1]), float(loc[2]))
         pos = Location.Location(tap)
-        my_agents.append(agent.agent(int(data['id']),float(data['value']),int(data['src'],int(data['dest']),float(data['speed']),pos)))
+        my_agents.append(agent.agent(int(data['id']),float(data['value']),int(data['src']),int(data['dest']),float(data['speed']),pos))
 
     return my_agents
 
@@ -102,7 +106,7 @@ what is left:
 """
 # if the agent is on a Node and not on the move its dest is -1 and only then can he be moved
 def allocate_agent_to_pok():
-    pokemons = getPOK()
+    pokemons = src_dest_pok()
     my_agents = getagents()
 
     # this is the best agent info
@@ -118,25 +122,26 @@ def allocate_agent_to_pok():
             agent = my_agents[i]
             if agent.dest == -1:
                 cost, path = algo.shortest_path(int(agent.src),int(pok.src))
+                if int(agent.src) == int(pok.src):
+                    best_agent_id = agent.id
+                    next_move = pok.dest
+                    break
                 if cost < bes_cost:
                     bes_cost = cost
-                    next_move = path[2]
+                    next_move = path[1]
                     best_agent_id = agent.id
 
         ttl = client.time_to_end()
         print(ttl, client.get_info())
         client.choose_next_edge('{"agent_id":' + str(best_agent_id) + ', "next_node_id":' + str(next_move) + '}')
 
-    client.move()
 
 
-
-
-
-
-
-
-
-
-
+###########################################################
+gui = Gui(algo,client)
 client.start()
+while client.is_running() == 'true':
+    allocate_agent_to_pok()
+    client.move()
+    gui.play()
+    time.wait(1)

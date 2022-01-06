@@ -5,8 +5,8 @@ class pokimon:
         self.value = value
         self.type = type
         self.pos = pos
-        self.src_Edge = None
-        self.dest_Edge = None
+        self.src = None
+        self.dest = None
         self.is_taken = False
         # self.agent = agent
 
@@ -20,7 +20,7 @@ class pokimon:
         self.pos = Location.Location(tap)
 
     def __repr__(self) -> str:
-        return str((self.src_Edge, self.dest_Edge))
+        return str((self.src, self.dest))
 
     """
     this function will find the Edge the pokimon is on
@@ -30,8 +30,8 @@ class pokimon:
     def is_Edge(self,x1,y1,x2,y2,type_Edge):
         epsilon = 0.00000001
 
-        m = (y1-y2) / (x1-x2)
-        b = y1 - (m*x1)
+        m = (float(y1)-float(y2)) / (float(x1)-float(x2))
+        b = float(y1) - (m*float(x1))
 
         check1 = float(self.pos.y)
         check2 = (m * float(self.pos.x)) + b
