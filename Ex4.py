@@ -104,28 +104,30 @@ what is left:
 def allocate_agent_to_pok():
     pokemons = getPOK()
     my_agents = getagents()
+
+    # this is the best agent info
     best_agent_id = -1
-    best_agent_location = -1
+
+    # this is what i will ues to find it and compear
+    bes_cost = sys.float_info.max
+    next_move = -1
+
     for i in range(len(pokemons)):
         pok = pokemons[i]
         for j in range(len(my_agents)):
             agent = my_agents[i]
             if agent.dest == -1:
-                
+                cost, path = algo.shortest_path(int(agent.src),int(pok.src))
+                if cost < bes_cost:
+                    bes_cost = cost
+                    next_move = path[2]
+                    best_agent_id = agent.id
 
+        ttl = client.time_to_end()
+        print(ttl, client.get_info())
+        client.choose_next_edge('{"agent_id":' + str(best_agent_id) + ', "next_node_id":' + str(next_move) + '}')
 
-
-
-
-        for agent in agents:
-            if agent.dest == -1:
-                next_node = (agent.src - 1) % len(graph.Nodes)
-                client.choose_next_edge(
-                    '{"agent_id":' + str(agent.id) + ', "next_node_id":' + str(next_node) + '}')
-                ttl = client.time_to_end()
-                print(ttl, client.get_info())
-
-        client.move()
+    client.move()
 
 
 
