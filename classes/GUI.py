@@ -123,17 +123,17 @@ class Gui:
 
                 Gui.arrow(self, (src_x, src_y), (dest_x, dest_y), 25, 6, color=(63, 97, 235))
 
-                FONT = pygame.font.SysFont('comicsans', 10)
-                text_surface = FONT.render(str(round(w, 2)), True, (0, 0, 0))
-                screen.blit(text_surface, ((src_x * 0.25 + dest_x * 0.75), (src_y * 0.25 + dest_y * 0.75)))
+                # FONT = pygame.font.SysFont('comicsans', 10)
+                # text_surface = FONT.render(str(round(w, 2)), True, (0, 0, 0))
+                # screen.blit(text_surface, ((src_x * 0.25 + dest_x * 0.75), (src_y * 0.25 + dest_y * 0.75)))
 
             for src in self.algo.graph.Nodes.values():
                 x = self.my_scale(src.pos.x, x=True)
                 y = self.my_scale(src.pos.y, y=True)
-                FONT = pygame.font.SysFont('comicsans', 10)
+                FONT = pygame.font.SysFont('comicsans', 13)
                 screen.blit(ball,(x-12,y-12))
-                node_text = FONT.render(str(src.id), True, (255, 255, 255))
-                screen.blit(node_text, (x - 6, y - 10))
+                node_text = FONT.render(str(src.id), True, (0, 0, 0))
+                screen.blit(node_text, (x - 12, y - 20))
 
             FONT = pygame.font.SysFont('comicsans', 20)
             # button activation here i set all the buttons on the graph
@@ -186,8 +186,16 @@ class Gui:
             if int(data['type']) < 0:
                 screen.blit(up_pokemon,(x-12,y-12))
 
+                FONT = pygame.font.SysFont('comicsans', 13)
+                node_text = FONT.render(str(data['value']), True, (0, 0, 0))
+                screen.blit(node_text, (x - 12, y - 20))
+
             if int(data['type']) >= 0:
                 screen.blit(down_pokemon,(x-12,y-12))
+
+                FONT = pygame.font.SysFont('comicsans', 13)
+                node_text = FONT.render(str(data['value']), True, (0, 0, 0))
+                screen.blit(node_text, (x - 12, y - 20))
 
     def on_click(self, event):
             if event == "button1":
