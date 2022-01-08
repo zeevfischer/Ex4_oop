@@ -13,13 +13,11 @@
 The pokemons are located on the graph’s (directed) edges, therefore, the agent needs to take the proper edge to “grab” the pokemon while each pokemon contains a value of points.
 The goal is to maximize the overall sum of points of the “grabbed” pokemons at a given limited time.
 ---
-###How to run the game?
-locate thr server and the data folder in the same folder
+### How to run the game?
+locate the server and the data folder in the same folder
 run cmd
-enter java -jar Ex4_Server_v0.0.jar [state_number]
+enter python3 Ex4.py [state_number]
 NOTE: state_number is a integer between 1-15
-run another cmd
-then run python3 
 
 ### What does the game contains? <br>
 - Given graph
