@@ -1,3 +1,4 @@
+
 # Ex4_OOP
 
 ### Prof. Boaz Ben-Moshe <br>
@@ -27,4 +28,5 @@ then run python3
 
 ---
 
-### All the information about our implementation of the game is in our <a href="https://github.com/zeevfischer/Ex4_oop/wiki</a> <br /> 
+### All the information about our implementation of the game is in our wiki at:
+https://github.com/zeevfischer/Ex4_oop/wiki
