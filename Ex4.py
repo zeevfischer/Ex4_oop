@@ -1,16 +1,17 @@
 import sys
 from types import SimpleNamespace
 import agent
+import subprocess
 import pokimon
 from classes.GUI import Gui
 from client import Client
 import json
-import time
 from pygame import gfxdraw
 import pygame
 from pygame import *
 from classes import GraphAlgo, Location
-
+import time
+subprocess.Popen(['powershell.exe', f'java -jar Ex4_Server_v0.0.jar {sys.argv[1]}'])
 PORT = 6666
 # server host (default localhost 127.0.0.1)
 HOST = '127.0.0.1'
@@ -107,7 +108,9 @@ what is left:
     allocate agent to pokimon while printing it
 """
 # if the agent is on a Node and not on the move its dest is -1 and only then can he be moved
+move = False
 def allocate_agent_to_pok():
+    global move
     pokemons = src_dest_pok()
     my_agents = getagents()
 
@@ -115,7 +118,7 @@ def allocate_agent_to_pok():
     best_agent_id = -1
 
     # this is what i will ues to find it and compear
-    bes_cost = sys.float_info.max
+    best_cost = sys.float_info.max
     next_move = -1
 
     #this will restart each time the agent alocated
@@ -123,33 +126,59 @@ def allocate_agent_to_pok():
         pokemons[i].agent = -1
 
     # now we find the best agent to the best pokimon
-    best_cost = 0
-    pok_id = -1
-    for i in range(len(pokemons)):
-        pok = pokemons[i]
-        for j in range(len(my_agents)):
-            agent = my_agents[j]
-            if agent.dest == -1:
-                cost, path = algo.shortest_path(int(agent.src),int(pok.src))
-                if int(agent.src) == int(pok.src):
-                    best_agent_id = agent.id
-                    next_move = pok.dest
-                    break
-                if cost < bes_cost:
-                    bes_cost = cost
-                    next_move = path[1]
-                    best_agent_id = agent.id
+    best_cost2 = sys.float_info.max
+    pok_location = -1
+    for j in range(len(my_agents)):#for each agent
+        agent = my_agents[j]
+        if agent.dest == -1:
+            for i in range(len(pokemons)):#check eack pokemon
+                pok = pokemons[i]
+                if pok.agent == -1:
+                    cost, path = algo.shortest_path(int(agent.src), int(pok.src))#get the cost
+                    if int(agent.src) == int(pok.src):#if got to location
+                        # best_agent_id = agent.id
+                        next_move = pok.dest
+                        pok.agent = agent.id
+                        move = True
+                        break
+                    if cost < best_cost2:#compear cost
+                        best_cost2 = cost
+                        next_move = path[1]
+                        # best_agent_id = agent.id
+                        pok_location = i
+                        move = True
+            pokemons[pok_location].agent = agent.id
+    # for i in range(len(pokemons)):
+    #     pok = pokemons[i]
+    #     for j in range(len(my_agents)):
+    #         agent = my_agents[j]
+    #         if agent.dest == -1:
+    #             cost, path = algo.shortest_path(int(agent.src),int(pok.src))
+    #             if int(agent.src) == int(pok.src):
+    #                 best_agent_id = agent.id
+    #                 next_move = pok.dest
+    #                 break
+    #             if cost < best_cost:
+    #                 best_cost = cost
+    #                 next_move = path[1]
+    #                 best_agent_id = agent.id
 
-        ttl = client.time_to_end()
-        print(ttl, client.get_info())
-        client.choose_next_edge('{"agent_id":' + str(best_agent_id) + ', "next_node_id":' + str(next_move) + '}')
-
-
+        # ttl = client.time_to_end()
+        # print(ttl, client.get_info())
+        client.choose_next_edge('{"agent_id":' + str(agent.id) + ', "next_node_id":' + str(next_move) + '}')
 
 ###########################################################
 gui = Gui(algo,client)
 client.start()
-while client.is_running() == 'true':
+time_to = int(client.time_to_end())/1000
+data = json.loads(client.get_info())["GameServer"]
+while client.is_running() == 'true' and int(data['moves']) < time_to*10:
+    data = json.loads(client.get_info())["GameServer"]
     allocate_agent_to_pok()
     client.move()
     gui.play()
+    time.sleep(0.067)
+    # time.sleep(0.06)
+# print(client.get_info())
+client.stop_connection()
+sys.exit()
