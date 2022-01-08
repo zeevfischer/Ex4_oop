@@ -151,8 +151,7 @@ class Gui:
 
             info = pygame.Rect(220, 0, 130, 40)
             pygame.draw.rect(screen, (200, 200, 200), info)
-            if self.client.is_running:
-                data = json.loads(self.client.get_info())["GameServer"]
+            data = json.loads(self.client.get_info())["GameServer"]
             info_text = FONT.render('grade = ' + str(data['grade']), True, (0, 0, 0))
             screen.blit(info_text, (info.x + 10, info.y + 5))
 
@@ -220,6 +219,7 @@ class Gui:
             pygame.display.set_mode((screen.get_width(), screen.get_height()), depth=32, flags=RESIZABLE)
             backrond = pygame.transform.scale(backrond, (screen.get_width(), screen.get_height()))
             screen.blit(backrond, [0,0])
+
             self.draw()
             self.draw_agent()
             self.draw_pokimon()
