@@ -8,7 +8,8 @@ class pokimon:
         self.src = None
         self.dest = None
         self.is_taken = False
-        # self.agent = agent
+
+        self.agent = -1
 
     def relode(self,data: dict):
         self.value = data['value']

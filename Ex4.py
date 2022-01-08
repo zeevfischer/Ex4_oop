@@ -24,6 +24,8 @@ algo.load_from_json(graph_json)
 graph = algo.get_graph() # the Graph
 ####################
 
+####################
+
 # this get me a list of all the pokimons
 def getPOK() -> list:
     pokemons = client.get_pokemons()
@@ -116,10 +118,17 @@ def allocate_agent_to_pok():
     bes_cost = sys.float_info.max
     next_move = -1
 
+    #this will restart each time the agent alocated
+    for i in range(len(pokemons)):
+        pokemons[i].agent = -1
+
+    # now we find the best agent to the best pokimon
+    best_cost = 0
+    pok_id = -1
     for i in range(len(pokemons)):
         pok = pokemons[i]
         for j in range(len(my_agents)):
-            agent = my_agents[i]
+            agent = my_agents[j]
             if agent.dest == -1:
                 cost, path = algo.shortest_path(int(agent.src),int(pok.src))
                 if int(agent.src) == int(pok.src):
@@ -144,4 +153,3 @@ while client.is_running() == 'true':
     allocate_agent_to_pok()
     client.move()
     gui.play()
-    time.wait(1)

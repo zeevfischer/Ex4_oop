@@ -128,23 +128,23 @@ while client.is_running() == 'true':
         tap = (a1,a2,0)
         p.pos = Location.Location(tap)
 
-    for p in pokemons:
-        for E in graph.Edges.values():
-            src = E.src
-            dest = E.dest
-            type_Edge = 0
-            if(src>dest):
-                type_Edge = -1
-            if(src<dest):
-                type_Edge = 1
-            pos_src = graph.Nodes[src].pos
-            pos_dest = graph.Nodes[dest].pos
-            x1 = my_scale(pos_src.x , x=True)
-            x2 = my_scale(pos_dest.x , x=True)
-            y1 = my_scale(pos_src.y , y=True)
-            y2 = my_scale(pos_dest.y , y=True)
-            if p.is_Edge(x1,y1,x2,y2,type_Edge) == True:
-                print("src = "+str(src)+" dest = "+str(dest))
+    # for p in pokemons:
+    #     for E in graph.Edges.values():
+    #         src = E.src
+    #         dest = E.dest
+    #         type_Edge = 0
+    #         if(src>dest):
+    #             type_Edge = -1
+    #         if(src<dest):
+    #             type_Edge = 1
+    #         pos_src = graph.Nodes[src].pos
+    #         pos_dest = graph.Nodes[dest].pos
+    #         x1 = my_scale(pos_src.x , x=True)
+    #         x2 = my_scale(pos_dest.x , x=True)
+    #         y1 = my_scale(pos_src.y , y=True)
+    #         y2 = my_scale(pos_dest.y , y=True)
+    #         if p.is_Edge(x1,y1,x2,y2,type_Edge) == True:
+    #             print("src = "+str(src)+" dest = "+str(dest))
 
 
     agents = json.loads(client.get_agents(),object_hook=lambda d: SimpleNamespace(**d)).Agents
