@@ -151,7 +151,8 @@ class Gui:
 
             info = pygame.Rect(220, 0, 130, 40)
             pygame.draw.rect(screen, (200, 200, 200), info)
-            data = json.loads(self.client.get_info())["GameServer"]
+            if self.client.is_running:
+                data = json.loads(self.client.get_info())["GameServer"]
             info_text = FONT.render('grade = ' + str(data['grade']), True, (0, 0, 0))
             screen.blit(info_text, (info.x + 10, info.y + 5))
 

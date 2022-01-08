@@ -172,10 +172,11 @@ gui = Gui(algo,client)
 client.start()
 time_to = int(client.time_to_end())/1000
 data = json.loads(client.get_info())["GameServer"]
-while client.is_running() == 'true' and int(data['moves']) < time_to*10:
+while client.is_running() == 'true':
     data = json.loads(client.get_info())["GameServer"]
     allocate_agent_to_pok()
-    client.move()
+    if int(data['moves']) < time_to*10-1:
+        client.move()
     gui.play()
     time.sleep(0.067)
     # time.sleep(0.06)
