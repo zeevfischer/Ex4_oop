@@ -2,7 +2,7 @@ import sys
 from types import SimpleNamespace
 import agent
 import subprocess
-import pokimon
+import pokemon
 from classes.GUI import Gui
 from client import Client
 import json
@@ -38,7 +38,7 @@ def getPOK() -> list:
         loc = temp.split(',')
         tap = (float(loc[0]), float(loc[1]), float(loc[2]))
         pos = Location.Location(tap)
-        pokemons.append(pokimon.pokimon(data['value'],data['type'],pos))
+        pokemons.append(pokemon.pokemon(data['value'], data['type'], pos))
     return pokemons
 
 # this will use the function above and the Graph to deturmin the Edge each pokimon is on
@@ -172,6 +172,7 @@ gui = Gui(algo,client)
 client.start()
 time_to = int(client.time_to_end())/1000
 data = json.loads(client.get_info())["GameServer"]
+
 while client.is_running() == 'true':
     data = json.loads(client.get_info())["GameServer"]
     allocate_agent_to_pok()

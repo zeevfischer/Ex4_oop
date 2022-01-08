@@ -13,7 +13,7 @@ class agent:
         # self.time = float('inf')
         # self.priorety = 0
 
-    def relode(self, data: dict) -> None:
+    def reload(self, data: dict) -> None:
         self.id = int(data['id'])
         self.value = float(data['value'])
         self.src = int(data['src'])
