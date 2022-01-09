@@ -2,7 +2,6 @@ import json
 import sys
 from queue import PriorityQueue
 from typing import List
-from matplotlib import pyplot as plt
 
 from classes import GUI
 from classes.DiGraph import DiGraph
