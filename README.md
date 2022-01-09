@@ -38,7 +38,7 @@ step 4: run the folowing: python Ex4.py 11
 #### option 2 (recommended)
 folow step 1,2 above  
 make sure to locate the server and the data folder in the same folder  
-step 3: run cmd in your folder(in the marked place right "cmd" it will open)
+step 3: run cmd in your folder(in the marked place right "cmd" and it will open)
 <img src="https://user-images.githubusercontent.com/92921822/148699884-74c88035-c646-49e3-8453-20e30b1a687f.jpg" width="800" height="400">  
 step 4: enter python Ex4.py 11  
 
