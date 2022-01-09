@@ -35,17 +35,18 @@ make sure to locate the server and the data folder in the same folder
 step 3: open the terminal in your work space (pycharm for exampel)  
 step 4: run the folowing: python Ex4.py 11   
 
-#### option 2
+#### option 2 (recommended)
 folow step 1,2 above  
 make sure to locate the server and the data folder in the same folder  
-step 3: run cmd in your folder  
+step 3: run cmd in your folder(in the marked place right "cmd" it will open)
+<img src="https://user-images.githubusercontent.com/92921822/148699884-74c88035-c646-49e3-8453-20e30b1a687f.jpg" width="800" height="400">  
 step 4: enter python Ex4.py 11  
 
 NOTE: in step: 4 "11" is the stage number and can alsow be 0-15  
 NOTE: the terminal path way should match your current workspace location  
 NOTE: Extract all the files from the zip !!!  
 NOTE: The following picture a fix to a common problem (ModuleNotFoundError: No module named 'pygame')  
-![how to ](https://user-images.githubusercontent.com/92921822/148664097-ba1eb39c-abf7-48ff-9049-4faac231f522.jpg)
+![how to ](https://user-images.githubusercontent.com/92921822/148664097-ba1eb39c-abf7-48ff-9049-4faac231f522.jpg)  
 ### how to fix:
 step 1: pip install pygame  
 step 2: a update command may be sugjested (optional)  
