@@ -10,17 +10,7 @@ class pokemon:
         self.src = None
         self.dest = None
         self.is_taken = False
-
         self.agent = -1
-
-    def reload(self, data: dict):
-        self.value = data['value']
-        self.type = data['type']
-
-        temp = str(data['pos'])
-        loc = temp.split(',')
-        tap = (int(loc[0]), int(loc[1]), int(loc[2]))
-        self.pos = Location.Location(tap)
 
     def __repr__(self) -> str:
         return str((self.src, self.dest))
