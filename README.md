@@ -37,7 +37,7 @@ step 4: run the folowing: python Ex4.py 11
 folow step 1,2 above  
 make shore to locate the server and the data folder in the same folder  
 step 3: run cmd in your folder  
-step 4: enter python3 Ex4.py 11
+step 4: enter python Ex4.py 11
 
 NOTE: in step: 4 "11" is the stage number and can alsow be 0-15  
 NOTE: the terminal path way shold match your curent worck space location  
