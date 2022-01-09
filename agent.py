@@ -9,14 +9,3 @@ class agent:
         self.dest = dest
         self.speed = speed
         self.pos = pos
-
-    def reload(self, data: dict) -> None:
-        self.id = int(data['id'])
-        self.value = float(data['value'])
-        self.src = int(data['src'])
-        self.dest = int(data['dest'])
-        self.speed = float(data['speed'])
-
-        temp = str(data['pos'])
-        loc = temp.split(',')
-        self.pos = Location.Location(int(loc[0]), int(loc[1]), int(loc[2]))
