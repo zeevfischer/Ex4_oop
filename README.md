@@ -30,6 +30,7 @@ There are tew main ways to start the game
 #### option 1 
 step 1: downlode the folowing content of this reposetor to your laptop  
 step 2: place all the fille in a progect folder ass is note changnig any fill or order can couses problems  
+make shore to locate the server and the data folder in the same folder  
 step 3: open the terminal in your work space (pycharm for exampel)  
 step 4: run the folowing: python Ex4.py 11   
 
